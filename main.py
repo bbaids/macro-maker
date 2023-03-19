@@ -1,52 +1,62 @@
 from tkinter import *
 from tkinter import ttk
 import mouse
+import time
 
-is_recording = False
-
-def record_actions(actions, action_details, actionsvar, is_recording):
-    is_recording = True
-    mouse.hook(lambda event: mouse_action(actions, action_details, actionsvar, is_recording, event))
-
-def stop_recording(is_recording):
+class Recording:
+    is_empty = True
     is_recording = False
-    # mouse.unhook_all()
+    actions = []
+    name = None
 
-def mouse_action(actions, action_details, actionsvar, is_recording, event):
-    if is_recording == False:
+    def record(self):
+        self.is_recording = True
+        self.is_empty = False
+        print("Now Recording")
+        mouse.on_click(self.record_click)
+
+    def play(self):
+        print(self.actions)
+
+    def record_click(self):
+        if self.is_recording:
+            self.actions.append({
+                "action": "left",
+                "position": mouse.get_position(),
+                "time": time.time(),
+                "delay": lambda : 0 if len(self.actions) == 0 else 
+            })
+
+        print(len(self.actions))
+
+    def stop_recording(self):
+        if self.is_recording:
+            self.actions.pop()
+        self.is_recording = False
         mouse.unhook_all()
-    else:
-        if(type(event) == mouse._mouse_event.ButtonEvent):
-            print(mouse.get_position())
-            print(event)
-            print(event.time)
-            print(event.button + " | " + event.event_type + " | " + str(event.time))
+        
 
-            actions.append(event.button + " | " + event.event_type + " | " + str(event.time))
-            action_details.append({"action": event.button, "time": event.time, "mouse_position": mouse.get_position()})
-            actionsvar.set(actions)
+    def read_recording(self):
+        if self.is_recording:
+            print("Please stop your recording first")
+        else:
+            print(self.actions)
+
+current_recording = Recording()
 
 root = Tk()
 root.title("Macro Maker")
 
 menu_frame = ttk.Frame(root)
 
-actions = []
-action_details = []
-actionsvar = StringVar(value=actions)
-
-record_button = ttk.Button(menu_frame, text="Record", command=lambda : record_actions(actions, action_details, actionsvar, is_recording))
-stop_button = ttk.Button(menu_frame, text="Stop", command=stop_recording(is_recording))
-
-action_list = Listbox(menu_frame, height=10, listvariable=actionsvar)
+record_button = ttk.Button(menu_frame, text="Record", command=current_recording.record)
+stop_button = ttk.Button(menu_frame, text="Stop", command=current_recording.stop_recording)
+read_button = ttk.Button(menu_frame, text="Read", command=current_recording.read_recording)
 
 menu_frame.grid(column=0, row=0)
 record_button.grid(column=0, row=0)
 stop_button.grid(column=1, row=0)
-action_list.grid(column=0, row = 2, columnspan=3)
-
-actions = []
-actionsvar.set(actions)
+read_button.grid(column=2, row=0)
 
 root.mainloop()
 
