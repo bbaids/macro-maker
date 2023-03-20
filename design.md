@@ -3,9 +3,12 @@ This program is meant to be a tool for recording and reusing sequences of mouse 
 
 # Functions
 ## MVP
-[] Record inputs in a timed sequence 
-[] Run the sequence  
-[] Loop the sequence  
+[X] Record inputs in a timed sequence 
+[X] Run the sequence  
+[X] Loop the sequence  
+[] Introduce variability in mouse speed/movement
+[] Create custom click to mimic mine
+[] Keyboard interrupt to stop macro execution
 [] Save the sequence  
 [] Load the a sequence and play it  
 
