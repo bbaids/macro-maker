@@ -21,4 +21,3 @@ play_button.grid(column=2, row=0)
 loop_checkbox.grid(column=2, row=1)
 
 root.mainloop()
-

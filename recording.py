@@ -12,7 +12,6 @@ class Recording:
                     self.actions.pop()
                     break
                 else:
-                    print(i)
                     self.actions[i]['delay'] = self.actions[i+1]['time'] - self.actions[i]['time']
 
             self.is_empty = False

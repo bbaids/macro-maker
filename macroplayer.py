@@ -31,17 +31,25 @@ class MacroPlayer():
         self.curr_rec.process_recording()
 
     def play_recording(self):
-        # keyboard.hook_key('esc', lambda event : self.interrupt)
+        self.interrupt = False
+        keyboard.add_hotkey('esc', self.set_interrupt)
+        print('playing')
 
         if self.is_recording:
             print("Please stop your recording first")
         else:      
             while self.loop_play:  
+                print('looped')
+                if self.interrupt:
+                    break
                 self.execute_actions()
             else: 
+                print('non-looped')
                 self.execute_actions()
 
     def execute_actions(self):
+        print('Executing')
+        print(self.interrupt)
         for action in self.curr_rec.actions:
             if self.interrupt:
                     break
@@ -52,6 +60,7 @@ class MacroPlayer():
     def toggle_loop(self):
         self.loop_play = not self.loop_play
 
-    # def interrupt(self):
-    #     self.interrupt = True
-    #     keyboard.unhook_all()
+    def set_interrupt(self):
+        print("Interrupting")
+        self.interrupt = True
+        keyboard.remove_all_hotkeys()
