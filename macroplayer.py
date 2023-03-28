@@ -53,9 +53,11 @@ class MacroPlayer():
         for action in self.curr_rec.actions:
             if self.interrupt:
                     break
-            mouse.move(action['position'][0], action['position'][1], duration=.25)
+            move_duration = .1  
+            time.sleep(action['delay'] - move_duration)
+            mouse.move(action['position'][0], action['position'][1], duration=move_duration)
             mouse.click()
-            time.sleep(action['delay'])
+            
 
     def toggle_loop(self):
         self.loop_play = not self.loop_play

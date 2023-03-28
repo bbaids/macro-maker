@@ -6,15 +6,16 @@ This program is meant to be a tool for recording and reusing sequences of mouse 
 [X] Record inputs in a timed sequence 
 [X] Run the sequence  
 [X] Loop the sequence  
-[] Introduce variability in mouse speed/movement
+[X] Keyboard interrupt to stop macro execution
+[] Introduce variability in mouse speed/movement/position
 [] Create custom click to mimic mine
-[] Keyboard interrupt to stop macro execution
-[] Save the sequence  
-[] Load the a sequence and play it  
 
 ## Enhancements
+[] Allow for edits to recording metadata
+[] Save the recording and associated metadata  
+[] Load a recording and play it
 [] Ability to create other actions in a loop such as  
-    [] Checking a specific pixel for a color 
+    [] Waiting until a specific pixel is a specific color 
 [] Keyboard inputs
 [] Edit existing sequences  
 [] Be able to create sequences of sequences  
