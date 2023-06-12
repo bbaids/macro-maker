@@ -1,6 +1,8 @@
 import mouse
 import keyboard
 import time
+import random
+
 import recording
 
 class MacroPlayer():
@@ -10,8 +12,7 @@ class MacroPlayer():
     interrupt = False
 
     def start_recording(self):
-        if not self.curr_rec.is_empty:
-            self.curr_rec.actions = []
+        self.curr_rec.actions = []
         
         self.is_recording = True
         print("Now Recording")
@@ -56,7 +57,7 @@ class MacroPlayer():
             move_duration = .1  
             time.sleep(action['delay'] - move_duration)
             mouse.move(action['position'][0], action['position'][1], duration=move_duration)
-            mouse.click()
+            self.human_click()
             
 
     def toggle_loop(self):
@@ -66,3 +67,9 @@ class MacroPlayer():
         print("Interrupting")
         self.interrupt = True
         keyboard.remove_all_hotkeys()
+
+    def human_click(self):
+        random_delay = random.uniform(0, .04)
+        mouse.press()
+        time.sleep(.05 + random_delay)
+        mouse.release()

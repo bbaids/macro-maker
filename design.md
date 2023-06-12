@@ -8,7 +8,7 @@ This program is meant to be a tool for recording and reusing sequences of mouse 
 [X] Loop the sequence  
 [X] Keyboard interrupt to stop macro execution
 [] Introduce variability in mouse speed/movement/position
-[] Create custom click to mimic mine
+[X] Create custom click to mimic mine
 
 ## Enhancements
 [] Allow for edits to recording metadata
